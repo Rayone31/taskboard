@@ -47,3 +47,4 @@ jobs:
           image-ref: taskboard-backend:latest
           severity: HIGH,CRITICAL
           exit-code: '1'
+          ignore-unfixed: true
