@@ -1,0 +1,21 @@
+groups:
+  - name: taskboard_alerts
+    rules:
+
+      - alert: NodeExporterDown
+        expr: up{job="node_exporter"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "node_exporter est DOWN"
+          description: "Les métriques système ne sont plus collectées."
+
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Utilisation mémoire élevée"
+          description: "La RAM dépasse 80% depuis plus d'1 minute."

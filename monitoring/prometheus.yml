@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 15s      # interroge les cibles toutes les 15 secondes
+  evaluation_interval: 15s  # évalue les règles d'alerte toutes les 15 secondes
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093  # nom du service dans docker-compose
+
+rule_files:
+  - /etc/prometheus/rules.yml  # chemin dans le conteneur
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090  # Prometheus se scrape lui-même
+
+  - job_name: node_exporter
+    static_configs:
+      - targets:
+          - node-exporter:9100  # nom du service dans docker-compose

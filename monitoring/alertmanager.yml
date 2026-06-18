@@ -1,0 +1,14 @@
+global:
+  smtp_smarthost: smtp.gmail.com:587
+  smtp_from: dylanhebrard.dh@gmail.com
+  smtp_auth_username: dylanhebrard.dh@gmail.com
+  smtp_auth_password: "cnawkyquhlzqtxas"
+  smtp_require_tls: true
+
+route:
+  receiver: mail
+
+receivers:
+  - name: mail
+    email_configs:
+      - to: dylanhebrard.dh@gmail.com
