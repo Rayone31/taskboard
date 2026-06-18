@@ -5,7 +5,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --omit=dev && npm install picomatch@4.0.4
 
-
 FROM node:22-alpine
 
 WORKDIR /app
@@ -14,6 +13,9 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY src ./src
 COPY .env.example ./.env.example
 COPY package*.json ./
+
+# Force picomatch à la version corrigée
+RUN npm install picomatch@4.0.4
 
 USER node
 
